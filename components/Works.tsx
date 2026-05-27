@@ -13,6 +13,7 @@ interface Work {
   outcome: string;
   tags: string;
   image_url: string;
+  url?: string;
   featured: number;
 }
 
@@ -20,13 +21,21 @@ function WorkCard({ work, index }: { work: Work; index: number }) {
   let tags: string[] = [];
   try { tags = JSON.parse(work.tags); } catch {}
 
-  return (
+  const Wrapper = work.url
+    ? ({ children }: { children: React.ReactNode }) => (
+        <a href={work.url} target="_blank" rel="noopener noreferrer" className={`block ${work.featured ? "lg:col-span-2" : ""}`}>
+          {children}
+        </a>
+      )
+    : ({ children }: { children: React.ReactNode }) => <>{children}</>;
+
+  const card = (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
-      className={`border border-theme hover-overlay transition-colors duration-300 group ${work.featured ? "lg:col-span-2" : ""}`}
+      className={`border border-theme hover-overlay transition-colors duration-300 group ${!work.url && work.featured ? "lg:col-span-2" : ""}`}
     >
       {/* Image area */}
       <div className={`bg-surface border-b border-theme flex items-center justify-center ${work.featured ? "h-72" : "h-48"} overflow-hidden relative`}>
@@ -87,6 +96,8 @@ function WorkCard({ work, index }: { work: Work; index: number }) {
       </div>
     </motion.div>
   );
+
+  return <Wrapper>{card}</Wrapper>;
 }
 
 const PLACEHOLDER_WORKS: Work[] = [

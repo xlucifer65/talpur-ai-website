@@ -13,11 +13,13 @@ function ensureTable() {
       outcome TEXT NOT NULL,
       tags TEXT NOT NULL DEFAULT '[]',
       image_url TEXT DEFAULT '',
+      url TEXT DEFAULT '',
       featured INTEGER NOT NULL DEFAULT 0,
       sort_order INTEGER NOT NULL DEFAULT 0,
       created_at TEXT NOT NULL DEFAULT (datetime('now'))
     )
   `);
+  try { db.exec("ALTER TABLE works ADD COLUMN url TEXT DEFAULT ''"); } catch {}
   return db;
 }
 
@@ -31,9 +33,9 @@ export async function POST(req: NextRequest) {
   if (!verifyToken(req)) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const db = ensureTable();
   const body = await req.json();
-  const { title, category, description, outcome, tags = [], image_url = "", featured = false, sort_order = 0 } = body;
+  const { title, category, description, outcome, tags = [], image_url = "", url = "", featured = false, sort_order = 0 } = body;
   const result = db.prepare(
-    "INSERT INTO works (title, category, description, outcome, tags, image_url, featured, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
-  ).run(title, category, description, outcome, JSON.stringify(tags), image_url, featured ? 1 : 0, sort_order);
+    "INSERT INTO works (title, category, description, outcome, tags, image_url, url, featured, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+  ).run(title, category, description, outcome, JSON.stringify(tags), image_url, url, featured ? 1 : 0, sort_order);
   return NextResponse.json({ id: result.lastInsertRowid });
 }
