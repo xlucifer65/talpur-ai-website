@@ -18,6 +18,10 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    shortcut: "/favicon.svg",
+  },
   title: "Talpur.ai | AI Automation Agency",
   description:
     "Talpur.ai helps businesses automate operations, marketing, sales, and workflows using AI-powered systems — reducing manual work and scaling what matters.",
