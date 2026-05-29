@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Syne, DM_Sans } from "next/font/google";
+import Script from "next/script";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
@@ -62,6 +63,7 @@ export default function RootLayout({
     <html lang="en" className={`${syne.variable} ${dmSans.variable}`} suppressHydrationWarning>
       <body className="bg-background text-text-primary font-dm antialiased">
         <ThemeProvider>{children}</ThemeProvider>
+        <Script src="https://zizka.ai/api/agent/embed/cmoq0n41t001vlqjcvkx9uilp" strategy="afterInteractive" />
       </body>
     </html>
   );
