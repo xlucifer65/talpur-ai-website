@@ -140,5 +140,4 @@ export const NAV_LINKS = [
   { label: "Solutions",    href: "/#solutions" },
   { label: "Case Studies", href: "/#case-studies" },
   { label: "Work",         href: "/works" },
-  { label: "Account",      href: "/admin" },
 ];
