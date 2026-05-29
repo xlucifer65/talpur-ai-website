@@ -135,9 +135,9 @@ export const STATS = [
 ];
 
 export const NAV_LINKS = [
-  { label: "Services",     href: "/#services" },
-  { label: "How It Works", href: "/#how-it-works" },
-  { label: "Solutions",    href: "/#solutions" },
-  { label: "Case Studies", href: "/#case-studies" },
+  { label: "Services",     href: "/services" },
+  { label: "How It Works", href: "/how-it-works" },
+  { label: "Solutions",    href: "/solutions" },
+  { label: "Case Studies", href: "/case-studies" },
   { label: "Work",         href: "/works" },
 ];
